@@ -28,7 +28,7 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     if n < 0:
         raise ValueError
 
-    return sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))[:5]
+    return sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))[:n]
 prik = input()
 
 if prik == 'normalize':
