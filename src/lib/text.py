@@ -29,24 +29,7 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
         raise ValueError
 
     return sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))[:n]
-prik = input()
 
-if prik == 'normalize':
-    print('Ввод:                    Вывод:')
-    print('ПрИвЕт\\nМИр\\t ->      ', normalize("ПрИвЕт\nМИр\t"))
-    print('ёжик, Ёлка ->           ', normalize("ёжик, Ёлка"))
-    print('Hello\\r\\nWorld ->     ', normalize("Hello\r\nWorld"))
-    print('  двойные   пробелы   ->', normalize("  двойные   пробелы  "))
-
-elif prik == 'tokenize':
-    print('Ввод:                   Вывод:')
-    print('привет мир ->         ', tokenize("привет мир"))
-    print('hello,world!!! ->     ', tokenize("hello,world!!!"))
-    print('по-настоящему круто ->', tokenize("по-настоящему круто"))
-    print('2025 год ->           ', tokenize("2025 год"))
-    print('emoji 😀 не слово ->  ', tokenize("emoji 😀 не слово"))
-
-elif prik == 'count_freq and top_n':
     print('Ввод:                        Вывод:')
     print('["a","b","a","c","b","a"] ->', count_freq(["a", "b", "a", "c", "b", "a"]))
     print('                            ', top_n(count_freq(["a", "b", "a", "c", "b", "a"]), n=2))
