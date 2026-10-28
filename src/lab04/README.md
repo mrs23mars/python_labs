@@ -60,7 +60,6 @@ def main() -> None:
 ```python 
 except FileNotFoundError as error:
         print(f'Файл не найден: {error.filename}')
-        return None
     except (UnicodeDecodeError, LookupError) as error:
         print(f'Ошибка кодировки')
     except error as error:
