@@ -44,4 +44,29 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
         for row in rows:
             writer.writerow(dict(zip(header, row)))
 
-json_to_csv("data/samples/people.json", "data/out/people_from_json.csv")
+def csv_to_json(csv_path: str, json_path: str) -> None:
+
+    if Path(csv_path).suffix.lower() != ".csv":
+        raise ValueError('Входной файл должен быть csv')
+    if Path(json_path).suffix.lower() != ".json":
+         raise ValueError("Выходной файл должен быть json")
+
+    try:
+        with open(csv_path, encoding="UTF-8") as file_in:
+            reader = csv.DictReader(file_in)
+            records = list(reader)
+    
+    except(csv.Error, UnicodeDecodeError):
+        raise ValueError('файл не читается')
+
+    if not records or not all(isinstance(item, dict) for item in records):
+        raise ValueError('файл пуст или не тот формат')
+    if not reader.fieldnames:
+        raise ValueError('нет заголовка')
+    if any(not name.strip() for name in reader.fieldnames):
+        raise ValueError("пустое название колонки")
+
+    with open(json_path, 'w', encoding="UTF-8") as file_out:
+        json.dump(records, file_out, ensure_ascii=False, indent=2)
+
+csv_to_json("data/samples/people.csv", "data/out/people.json")
