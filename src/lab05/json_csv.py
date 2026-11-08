@@ -66,7 +66,8 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     if any(not name.strip() for name in reader.fieldnames):
         raise ValueError("пустое название колонки")
 
+    if len(set(reader.fieldnames)) != len(reader.fieldnames):
+        raise ValueError("названия колонок не должны повторяться")
+
     with open(json_path, 'w', encoding="UTF-8") as file_out:
         json.dump(records, file_out, ensure_ascii=False, indent=2)
-
-csv_to_json("data/samples/people.csv", "data/out/people.json")
