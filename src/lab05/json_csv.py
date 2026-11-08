@@ -13,7 +13,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
             records = json.load(file_in)
 
     except json.JSONDecodeError:
-        raise ValueError('')
+        raise ValueError('пустой файл или неподдерживаемая структура')
 
     if not isinstance(records, list) or not records or not all(isinstance(item, dict) for item in records):
         raise ValueError('пустой json или не тот формат')
@@ -59,10 +59,11 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     except(csv.Error, UnicodeDecodeError):
         raise ValueError('файл не читается')
 
-    if not records or not all(isinstance(item, dict) for item in records):
-        raise ValueError('файл пуст или не тот формат')
     if not reader.fieldnames:
         raise ValueError('нет заголовка')
+    if not records or not all(isinstance(item, dict) for item in records):
+        raise ValueError('файл пуст или не тот формат')
+    
     if any(not name.strip() for name in reader.fieldnames):
         raise ValueError("пустое название колонки")
 
