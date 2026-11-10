@@ -2,8 +2,6 @@ import csv
 from pathlib import Path
 from openpyxl import Workbook
 
-
-
 def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
 
     if Path(csv_path).suffix.lower() != '.csv':
